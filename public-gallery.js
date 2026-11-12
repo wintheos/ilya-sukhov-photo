@@ -1,5 +1,5 @@
 (async()=>{
-const api=PortfolioAPI;const preview=new URLSearchParams(location.search).has('preview');
+try{const response=await fetch('photo-manifest.json');if(response.ok)window.PortfolioStaticPhotos=await response.json()}catch{}const api=PortfolioAPI;const preview=new URLSearchParams(location.search).has('preview');
 const notice=document.createElement('p');notice.style.cssText='margin:25px 4vw;color:#737373';notice.setAttribute('role','status');document.querySelector('header').after(notice);
 const dialog=document.querySelector('.series-dialog'),stage=dialog.querySelector('.series-stage');dialog.querySelector('.series-admin').remove();dialog.querySelector('.series-prev').remove();dialog.querySelector('.series-next').remove();let opener;
 dialog.querySelector('.series-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{document.body.style.overflow='';opener?.focus()});
