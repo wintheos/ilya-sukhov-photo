@@ -1,6 +1,6 @@
 // Private previews stay in this browser; unpublished images are never mirrored publicly.
 window.AdminImages=(()=>{
-let manifestReady=fetch('photo-manifest.json?v=20261112-hover6',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(data=>window.PortfolioStaticPhotos=data).catch(()=>{});
+let manifestReady=fetch('photo-manifest.json?v=20261112-delete7',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(data=>window.PortfolioStaticPhotos=data).catch(()=>{});
 let dbPromise=new Promise(resolve=>{const r=indexedDB.open('portfolio-admin-previews-v2',1);r.onupgradeneeded=()=>r.result.createObjectStore('images');r.onsuccess=()=>resolve(r.result);r.onerror=()=>resolve(null)});
 async function cached(path){const db=await dbPromise;if(!db)return null;return new Promise(resolve=>{const r=db.transaction('images').objectStore('images').get(path);r.onsuccess=()=>resolve(r.result);r.onerror=()=>resolve(null)})}
 async function remember(path,blob){const db=await dbPromise;if(!db)return;try{db.transaction('images','readwrite').objectStore('images').put(blob,path)}catch{}}
